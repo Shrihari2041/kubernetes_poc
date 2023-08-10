@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod2-deployment
+  namespace: k8s-poc
+  labels:
+    app: pod2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pod2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: pod2
+    spec:
+      containers:
+        - name: webapi1-container
+          image: acrmonitoringtool.azurecr.io/webapi1:latest
+          resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        

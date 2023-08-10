@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pod2-webapi1-service
+  namespace: k8s-poc
+spec:
+  selector:
+    app: pod2
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5003
+      nodePort: 30083
+
